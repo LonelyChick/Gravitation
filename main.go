@@ -17,7 +17,7 @@ func init() {
 }
 
 func main() {
-	gin.SetMode(setting.ServerSetting.Runmode)
+	//gin.SetMode(setting.ServerSetting.Runmode)
 
 	routerInit := routers.Router()
 	readTimeout := setting.ServerSetting.ReadTimeout
