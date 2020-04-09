@@ -7,6 +7,16 @@ import (
 	"github.com/go-ini/ini"
 )
 
+type App struct {
+	RuntimeRootPath string
+	LogSavePath string
+	LogSaveName string
+	LogFileExt string
+	TimeFormat string
+}
+
+var AppSetting = &App{}
+
 type Server struct {
 	Runmode string
 	HttpPort int
@@ -39,6 +49,7 @@ func Setup() {
 
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
+	mapTo("app", AppSetting)
 
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
 	ServerSetting.WriteTimeout = ServerSetting.WriteTimeout * time.Second

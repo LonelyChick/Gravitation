@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"gravitation/pkg/logging"
+	"log"
 
-	//"github.com/gin-gonic/gin"
 	"net/http"
 
 
@@ -14,25 +15,28 @@ import (
 
 func init() {
 	setting.Setup()
+
+	logging.Setup()
 }
 
 func main() {
-	//gin.SetMode(setting.ServerSetting.Runmode)
+	gin.SetMode(setting.ServerSetting.Runmode)
 
 	routerInit := routers.Router()
 	readTimeout := setting.ServerSetting.ReadTimeout
 	writeTimeout := setting.ServerSetting.WriteTimeout
-	litsenPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+	listenPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 	maxHeadBytes := 1 << 20
 
 	server := &http.Server{
-		Addr:              litsenPoint,
+		Addr:              listenPoint,
 		Handler:           routerInit,
 		ReadTimeout:       readTimeout,
 		WriteTimeout:      writeTimeout,
 		MaxHeaderBytes:    maxHeadBytes,
 	}
 
+	log.Printf("[info] start http server listening %s", listenPoint)
 	server.ListenAndServe()
 
 }
