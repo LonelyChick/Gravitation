@@ -8,8 +8,8 @@ import (
 
 	"net/http"
 
-
 	"gravitation/pkg/setting"
+	"gravitation/pkg/util"
 	"gravitation/routers"
 )
 
@@ -17,6 +17,7 @@ func init() {
 	setting.Setup()
 
 	logging.Setup()
+	util.Setup()
 }
 
 func main() {
